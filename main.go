@@ -81,7 +81,7 @@ func main() {
 	ticker := time.NewTicker(time.Millisecond * 100)
 
 	lies := make(map[int]int)
-	last := int(5000)
+	last := int(10000)
 
 	n := int(3)
 	for i := 0; i < len(teams) && n <= last; i++ {
