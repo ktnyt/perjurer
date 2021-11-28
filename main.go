@@ -25,12 +25,15 @@ func single_test(n, a int) bool {
 		s++
 	}
 
-	if powmod(a, d, n) == 1 {
+	x := powmod(a, d, n)
+	if x == 1 || x == n-1 {
 		return true
 	}
 
 	for r := 0; r < s; r++ {
-		if powmod(a, d, n) == n-1 {
+		x *= x
+		x %= n
+		if x == n-1 {
 			return true
 		}
 	}
@@ -50,10 +53,6 @@ func miller_rabin(n int, as ...int) bool {
 type tuple struct {
 	a int
 	b int
-}
-
-func newTuple(a, b int) tuple {
-	return tuple{a, b}
 }
 
 type sortRight []tuple
@@ -82,7 +81,7 @@ func main() {
 	ticker := time.NewTicker(time.Millisecond * 100)
 
 	lies := make(map[int]int)
-	last := int(2048)
+	last := int(5000)
 
 	n := int(3)
 	for i := 0; i < len(teams) && n <= last; i++ {
